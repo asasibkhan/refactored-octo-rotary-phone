@@ -8,13 +8,39 @@ loginBtn.addEventListener('click', function(){
     
     
 }) 
+
+// deposit button event hendler
 const dipositBtn = document.getElementById("addDeposit")
 dipositBtn.addEventListener("click", function (){
-    const depositAmount = document.getElementById("depositAmount").value;
-    const depositNumber = parseFloat(depositAmount)
-    const carrentDeposit = document.getElementById("carrentDeposit").innerText
-    const carrentDepositNumber = parseFloat(carrentDeposit)
-    const totalDeposit = depositNumber + carrentDepositNumber
-    document.getElementById("carrentDeposit").innerText = totalDeposit;
+    const depositNumber = getInputNumber("depositAmount")
+    updateSpanText("carrentDeposit", depositNumber)
+    updateSpanText("carrentBlance", depositNumber)
     document.getElementById("depositAmount").value = ""
 }) 
+function updateSpanText(id, depositNumber){
+    const carrent = document.getElementById(id).innerText
+    const carrentNumber = parseFloat(carrent)
+    const total = depositNumber + carrentNumber;
+    document.getElementById(id).innerText = total;
+}
+
+
+
+
+// withdraw button event hendler
+const withdrawBtn = document.getElementById("withdraw")
+withdrawBtn.addEventListener("click", function (){
+    const withdrawNumber = getInputNumber("withdrawAmount")
+    updateSpanText("carrentwidthdraw", withdrawNumber)
+    updateSpanText("carrentBlance", -1 * withdrawNumber)
+
+    
+    document.getElementById("withdrawAmount").value = ""
+})
+function getInputNumber(id){
+    const withdrawAmount = document.getElementById(id).value;
+    const withdrawNumber = parseFloat(withdrawAmount)
+    return withdrawNumber;
+}
+
+
